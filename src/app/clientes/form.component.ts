@@ -7,7 +7,7 @@ import { Cliente } from './cliente.model';
 })
 export class FormComponent implements OnInit {
 
-  cliente: Cliente;
+  cliente: Cliente = new Cliente();
   titulo = 'Crear Cliente';
 
   constructor() { }
@@ -16,7 +16,8 @@ export class FormComponent implements OnInit {
   }
 
   create(): void {
-    console.log('clicked!' + this.cliente);
+    console.log('clicked!');
+    console.log(this.cliente);
   }
 
 }
