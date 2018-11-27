@@ -1,19 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from "rxjs/index";
+
 import { Cliente } from './cliente.model';
-import { CLIENTES } from './clientes.json';
+import { ClienteService } from "./cliente.service";
+
 
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html'
 })
-export class ClientesComponent implements OnInit {
+export class ClientesComponent implements OnInit, OnDestroy {
 
   clientes: Cliente[];
+  subscription: Subscription;
 
-  constructor() { }
+  constructor(private clienteService: ClienteService) { }
 
   ngOnInit() {
-    this.clientes = CLIENTES;
+    this.subscription = this.clienteService.getClientes()
+      .subscribe((clientes: Cliente[]) => this.clientes = clientes);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }
