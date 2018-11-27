@@ -8,7 +8,7 @@ import { FooterComponent } from './footer/footer.component';
 import { DirectivaComponent } from './directiva/directiva.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { HttpClientModule } from "@angular/common/http";
-import {ClienteService} from "./clientes/cliente.service";
+import { ClienteService } from "./clientes/cliente.service";
 
 @NgModule({
   declarations: [
