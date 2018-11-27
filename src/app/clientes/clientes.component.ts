@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from "rxjs/index";
+import { Subscription } from 'rxjs';
 
 import { Cliente } from './cliente.model';
-import { ClienteService } from "./cliente.service";
+import { ClienteService } from './cliente.service';
 
 @Component({
   selector: 'app-clientes',
