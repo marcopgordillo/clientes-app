@@ -7,7 +7,11 @@
       <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/clientes/form']">Crear Cliente</button>
     </div>
 
-    <table class="table table-bordered table-striped">
+    <div *ngIf="clientes?.length === 0" class="alert alert-info">
+      No hay registros en la base de datos!
+    </div>
+    <!-- *ngIf primero ve si existe la propiedad length (?) luego ve si su valor es mayor a cero -->
+    <table class="table table-bordered table-striped" *ngIf="clientes?.length > 0">
       <thead>
         <tr>
           <th>id</th>
@@ -15,6 +19,8 @@
           <th>Apellido</th>
           <th>Email</th>
           <th>Fecha</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
         </tr>
       </thead>
       <tbody>
@@ -24,6 +30,12 @@
           <td>{{ cliente.apellido }}</td>
           <td>{{ cliente.email }}</td>
           <td>{{ cliente.createAt | date }}</td>
+          <td>
+            <button class="btn btn-warning btn-sm" type="button" [routerLink]="['/clientes/form', cliente.id]">editar</button>
+          </td>
+          <td>
+            <button class="btn btn-danger btn-sm" type="button" (click)="delete(cliente)">eliminar</button>
+          </td>
         </tr>
       </tbody>
     </table>
