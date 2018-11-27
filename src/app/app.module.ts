@@ -7,8 +7,10 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DirectivaComponent } from './directiva/directiva.component';
 import { ClientesComponent } from './clientes/clientes.component';
-import { HttpClientModule } from "@angular/common/http";
-import {ClienteService} from "./clientes/cliente.service";
+import { HttpClientModule } from '@angular/common/http';
+import { ClienteService } from './clientes/cliente.service';
+import { FormsModule } from '@angular/forms';
+import { FormComponent } from './clientes/form.component';
 
 @NgModule({
   declarations: [
@@ -16,12 +18,14 @@ import {ClienteService} from "./clientes/cliente.service";
     HeaderComponent,
     FooterComponent,
     DirectivaComponent,
-    ClientesComponent
+    ClientesComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [ClienteService],
   bootstrap: [AppComponent]

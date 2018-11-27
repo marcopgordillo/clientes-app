@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from "rxjs/index";
+import { Subscription } from 'rxjs';
 
 import { Cliente } from './cliente.model';
-import { ClienteService } from "./cliente.service";
-
+import { ClienteService } from './cliente.service';
 
 @Component({
   selector: 'app-clientes',
@@ -18,11 +17,11 @@ export class ClientesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.clienteService.getClientes()
-      .subscribe((clientes: Cliente[]) => this.clientes = clientes);
+    .subscribe(
+      (clientes: Cliente[]) => this.clientes = clientes);
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 }
