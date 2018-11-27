@@ -25,7 +25,7 @@ export class FormComponent implements OnInit {
     this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
-        this.clienteService.getCliente(+id)
+        this.clienteService.getCliente(id)
           .subscribe(
           cliente => this.cliente = cliente
         );
@@ -46,7 +46,7 @@ export class FormComponent implements OnInit {
     this.clienteService.update(this.cliente)
       .subscribe(cliente => {
         this.router.navigate(['clientes']);
-        swal('Cleinte Actualizado', `Cliente ${cliente.nombre} actualizado con èxito`, 'success');
+        swal('Cliente Actualizado', `Cliente ${cliente.nombre} actualizado con èxito`, 'success');
       });
   }
 
