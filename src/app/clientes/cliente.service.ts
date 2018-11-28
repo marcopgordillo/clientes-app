@@ -6,6 +6,7 @@ import swal from 'sweetalert2';
 
 import {Cliente} from './cliente.model';
 import {Router} from '@angular/router';
+import {formatDate} from "@angular/common";
 
 
 @Injectable()
@@ -22,9 +23,10 @@ export class ClienteService {
     // return this.http.get<Cliente[]>(this.urlEndPoint);
     return this.http.get(this.urlEndPoint).pipe(
       map(response => {
-        let clientes = response as Cliente[];
+        const clientes = response as Cliente[];
         return clientes.map(cliente => {
           cliente.nombre = cliente.nombre.toUpperCase();
+          cliente.createAt = formatDate(cliente.createAt, 'dd-MM-yyyy', 'en-US', 'UTC-5');
           return cliente;
         });
       })
