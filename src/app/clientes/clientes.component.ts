@@ -18,15 +18,16 @@ export class ClientesComponent implements OnInit, OnDestroy {
   constructor(private clienteService: ClienteService) { }
 
   ngOnInit() {
-    this.subscription = this.clienteService.getClientes()
+    let page = 0;
+    this.subscription = this.clienteService.getClientes(page)
       .pipe(
-        tap(clientes => {
+        tap(response => {
           console.log('ClientesComponent: tap 3');
-          clientes.forEach(cliente => console.log(cliente.nombre));
+          (response.content as Cliente[]).forEach(cliente => console.log(cliente.nombre));
         })
       )
       .subscribe(
-        (clientes: Cliente[]) => this.clientes = clientes);
+        response => this.clientes = response.content as Cliente[]);
   }
 
   ngOnDestroy() {
