@@ -1,3 +1,9 @@
-<ul *ngIf="paginas?.length > 0" class="pagination">
-  <li *ngFor="let pagina of paginas">{{ pagina }}</li>
-</ul>
+<nav aria-label="paginator">
+  <ul *ngIf="paginas?.length > 0" class="pagination">
+    <li class="page-item" *ngFor="let pagina of paginas" [ngClass]="{active: pagina-1 === paginador.number}">
+      <a class="page-link" [routerLink]="['/clientes/page',pagina-1]">
+        {{ pagina }} <span class="sr-only" *ngIf="pagina-1 === paginador.number">(current)</span>
+      </a>
+    </li>
+  </ul>
+</nav>
