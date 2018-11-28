@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class DetalleComponent implements OnInit {
   cliente: Cliente;
   titulo = 'Detalle del Cliente';
+  private fotoSeleccionada: File;
 
   constructor(private clienteService: ClienteService,
               private route: ActivatedRoute) { }
@@ -26,4 +27,14 @@ export class DetalleComponent implements OnInit {
       });
   }
 
+  seleccionarFoto(event) {
+    this.fotoSeleccionada = event.target.files[0];
+  }
+
+  subirFoto() {
+    this.clienteService.subirFoto(this.fotoSeleccionada, this.cliente.id)
+      .subscribe(cliente => {
+        this.cliente = cliente;
+      });
+  }
 }

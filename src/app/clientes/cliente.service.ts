@@ -64,7 +64,7 @@ export class ClienteService {
     return this.http.put(`${this.urlEndPoint}/${cliente.id}`, cliente, {headers: this.httpHeaders}).pipe(
       catchError(e => {
 
-        if (e.status==400) {
+        if (e.status === 400) {
           return throwError(e);
         }
 
@@ -77,10 +77,23 @@ export class ClienteService {
   delete(id: number): Observable<Cliente> {
     return this.http.delete<Cliente>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders}).pipe(
       catchError(e => {
-        console.log(e.error.error);
         swal(e.error.mensaje, e.error.error, 'error');
         return throwError(e);
       })
     );
+  }
+
+  subirFoto(archivo: File, id: number): Observable<Cliente> {
+    const formData = new FormData();
+    formData.append('archivo', archivo);
+    formData.append('id', id);
+    return this.http.post(`${this.urlEndPoint}/upload/`, formData)
+      .pipe(
+        map((response: any) => response.cliente as Cliente),
+        catchError(e => {
+          swal(e.error.mensaje, e.error.error, 'error');
+          return throwError(e);
+        })
+      );
   }
 }
