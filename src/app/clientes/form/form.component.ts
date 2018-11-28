@@ -1,12 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {Cliente} from './cliente.model';
-import {ClienteService} from './cliente.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Cliente } from '../cliente.model';
+import { ClienteService } from '../cliente.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form',
-  templateUrl: './form.component.html'
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
 

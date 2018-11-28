@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DirectivaComponent } from './directiva/directiva.component';
 import { ClientesComponent } from './clientes/clientes.component';
-import { FormComponent } from './clientes/form.component';
+import { FormComponent } from './clientes/form/form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/clientes', pathMatch: 'full' },
