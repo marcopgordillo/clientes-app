@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {Observable, throwError} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {catchError, map, tap} from 'rxjs/internal/operators';
+import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map } from 'rxjs/internal/operators';
 import swal from 'sweetalert2';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
-import {Cliente} from './cliente.model';
+import { Cliente } from './cliente.model';
 
 
 @Injectable()
@@ -21,12 +21,6 @@ export class ClienteService {
   getClientes(page: number): Observable<any> {
     // return this.http.get<Cliente[]>(this.urlEndPoint);
     return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
-      tap((response: any) => {
-        console.log('ClienteService: tap 1');
-        (response.content as Cliente[]).forEach(cliente => {
-          console.log(cliente.nombre);
-        })
-      }),
       map((response: any) => {
         (response.content as Cliente[]).map(cliente => {
           cliente.nombre = cliente.nombre.toUpperCase();
@@ -36,12 +30,6 @@ export class ClienteService {
           return cliente;
         });
         return response;
-      }),
-      tap(response => {
-        console.log('ClienteService: tap 2');
-        (response.content as Cliente[]).forEach(cliente => {
-          console.log(cliente.nombre);
-        })
       })
     );
   }
@@ -51,7 +39,7 @@ export class ClienteService {
       map((response: any) => response.cliente as Cliente),
       catchError(e => {
 
-        if (e.status==400) {
+        if (e.status === 400) {
           return throwError(e);
         }
 
