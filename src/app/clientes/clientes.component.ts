@@ -20,9 +20,13 @@ export class ClientesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.clienteService.getClientes()
       .pipe(
-        tap(clientes => this.clientes = clientes)
+        tap(clientes => {
+          console.log('ClientesComponent: tap 3');
+          clientes.forEach(cliente => console.log(cliente.nombre));
+        })
       )
-      .subscribe();
+      .subscribe(
+        (clientes: Cliente[]) => this.clientes = clientes);
   }
 
   ngOnDestroy() {
