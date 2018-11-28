@@ -4,7 +4,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError, map} from 'rxjs/internal/operators';
 import swal from 'sweetalert2';
 import {Router} from '@angular/router';
-import {DatePipe} from "@angular/common";
 
 import {Cliente} from './cliente.model';
 
@@ -26,8 +25,8 @@ export class ClienteService {
         const clientes = response as Cliente[];
         return clientes.map(cliente => {
           cliente.nombre = cliente.nombre.toUpperCase();
-          const datePipe = new DatePipe('es');
-          cliente.createAt = datePipe.transform(cliente.createAt, 'EEEE dd, MMMM yyyy');
+          /*const datePipe = new DatePipe('es');
+          cliente.createAt = datePipe.transform(cliente.createAt, 'EEEE dd, MMMM yyyy');*/
           // cliente.createAt = formatDate(cliente.createAt, 'dd-MM-yyyy', 'en-US', 'UTC-5');
           return cliente;
         });
