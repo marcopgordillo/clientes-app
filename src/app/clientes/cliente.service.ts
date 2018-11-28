@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map } from 'rxjs/internal/operators';
+import {Injectable} from '@angular/core';
+import {Observable, throwError} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {catchError, map} from 'rxjs/internal/operators';
 import swal from 'sweetalert2';
 
-import { Cliente } from './cliente.model';
-import { Router } from '@angular/router';
+import {Cliente} from './cliente.model';
+import {Router} from '@angular/router';
 
 
 @Injectable()
@@ -29,7 +29,11 @@ export class ClienteService {
     return this.http.post(this.urlEndPoint, cliente, {headers: this.httpHeaders}).pipe(
       map((response: any) => response.cliente as Cliente),
       catchError(e => {
-        console.log(e.error.error);
+
+        if (e.status==400) {
+          return throwError(e);
+        }
+
         swal(e.error.mensaje, e.error.error, 'error');
         return throwError(e);
       })
@@ -50,7 +54,11 @@ export class ClienteService {
   update(cliente: Cliente): Observable<any> {
     return this.http.put(`${this.urlEndPoint}/${cliente.id}`, cliente, {headers: this.httpHeaders}).pipe(
       catchError(e => {
-        console.log(e.error.error);
+
+        if (e.status==400) {
+          return throwError(e);
+        }
+
         swal(e.error.mensaje, e.error.error, 'error');
         return throwError(e);
       })
