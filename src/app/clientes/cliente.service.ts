@@ -6,7 +6,7 @@ import swal from 'sweetalert2';
 
 import {Cliente} from './cliente.model';
 import {Router} from '@angular/router';
-import {formatDate} from "@angular/common";
+import {DatePipe} from "@angular/common";
 
 
 @Injectable()
@@ -26,7 +26,9 @@ export class ClienteService {
         const clientes = response as Cliente[];
         return clientes.map(cliente => {
           cliente.nombre = cliente.nombre.toUpperCase();
-          cliente.createAt = formatDate(cliente.createAt, 'dd-MM-yyyy', 'en-US', 'UTC-5');
+          let datePipe = new DatePipe('en-US');
+          cliente.createAt = datePipe.transform(cliente.createAt, 'dd/MM/yyyy');
+          // cliente.createAt = formatDate(cliente.createAt, 'dd-MM-yyyy', 'en-US', 'UTC-5');
           return cliente;
         });
       })
