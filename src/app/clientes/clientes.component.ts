@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs';
 import swal from 'sweetalert2';
 
-import { Cliente } from './cliente.model';
-import { ClienteService } from './cliente.service';
+import {Cliente} from './cliente.model';
+import {ClienteService} from './cliente.service';
+import {tap} from "rxjs/internal/operators";
 
 @Component({
   selector: 'app-clientes',
@@ -18,8 +19,14 @@ export class ClientesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.clienteService.getClientes()
-    .subscribe(
-      (clientes: Cliente[]) => this.clientes = clientes);
+      .pipe(
+        tap(clientes => {
+          console.log('ClientesComponent: tap 3');
+          clientes.forEach(cliente => console.log(cliente.nombre));
+        })
+      )
+      .subscribe(
+        (clientes: Cliente[]) => this.clientes = clientes);
   }
 
   ngOnDestroy() {
