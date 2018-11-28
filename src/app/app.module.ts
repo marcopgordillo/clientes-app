@@ -11,11 +11,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { ClienteService } from './clientes/cliente.service';
 import { FormsModule } from '@angular/forms';
 import { FormComponent } from './clientes/form.component';
-import localeEs from '@angular/common/locales/es';
+import localeES_EC from '@angular/common/locales/es-EC';
 import { registerLocaleData } from '@angular/common';
 import { PaginatorComponent } from './paginator/paginator.component';
 
-registerLocaleData(localeEs, 'es');
+registerLocaleData(localeES_EC, 'es_EC');
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ registerLocaleData(localeEs, 'es');
   ],
   providers: [
     ClienteService,
-    {provide: LOCALE_ID, useValue: 'es'}
+    {provide: LOCALE_ID, useValue: 'es_EC'}
   ],
   bootstrap: [AppComponent]
 })
