@@ -1,11 +1,12 @@
-import {Injectable} from '@angular/core';
-import {Observable, throwError} from 'rxjs';
-import {HttpClient, HttpEvent, HttpHeaders, HttpRequest} from '@angular/common/http';
-import {catchError, map} from 'rxjs/internal/operators';
+import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { catchError, map } from 'rxjs/internal/operators';
 import swal from 'sweetalert2';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
-import {Cliente} from './cliente.model';
+import { Cliente } from './cliente.model';
+import { Region } from './region.model';
 
 
 @Injectable()
@@ -17,6 +18,10 @@ export class ClienteService {
 
   constructor(private http: HttpClient,
               private router: Router) { }
+
+  getRegiones(): Observable<Region[]> {
+    return this.http.get<Region[]>(this.urlEndPoint + '/regiones');
+  }
 
   getClientes(page: number): Observable<any> {
     // return this.http.get<Cliente[]>(this.urlEndPoint);
