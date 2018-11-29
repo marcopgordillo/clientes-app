@@ -48,7 +48,7 @@ export class FormComponent implements OnInit {
         },
         err => {
           this.errores = err.error.errors as string[];
-          console.log("Código del error desde el backend: " + err.status);
+          console.log('Código del error desde el backend: ' + err.status);
           console.log(err.error.errors);
         }
     );
@@ -63,10 +63,15 @@ export class FormComponent implements OnInit {
         },
         err => {
           this.errores = err.error.errors as string[];
-          console.log("Código del error desde el backend: " + err.status);
+          console.log('Código del error desde el backend: ' + err.status);
           console.log(err.error.errors);
         }
     );
+  }
+
+  compararRegion(o1: Region, o2: Region): boolean {
+    return o1 == null || o2 == null ? false : o1.id === o2.id; // Se está siendo menos estricto con == antes que con === por el caso de undefined con eso valida solo por valor y no por tipo.
+    // return o1 === null || o2 === null || o1 === undefined || o2 == undefined ? false : o1.id === o2.id;
   }
 
 }
