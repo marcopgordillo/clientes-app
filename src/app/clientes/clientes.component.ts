@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
 
@@ -6,6 +6,7 @@ import { Cliente } from './cliente.model';
 import { ClienteService } from './cliente.service';
 import { ModalService } from './detalle/modal.service';
 import { environment } from '../../environments/environment';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -13,12 +14,13 @@ import { environment } from '../../environments/environment';
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.scss']
 })
-export class ClientesComponent implements OnInit {
+export class ClientesComponent implements OnInit, OnDestroy {
 
   clientes: Cliente[];
   paginador: any;
   clienteSeleccionado: Cliente;
   urlImgEndPoint: string = environment.urlImgEndPoint;
+  private subscription: Subscription;
 
   constructor(private clienteService: ClienteService,
               private route: ActivatedRoute,
@@ -41,6 +43,19 @@ export class ClientesComponent implements OnInit {
       }
     );
 
+    this.subscription = this.modalService.notificarUpload
+      .subscribe(cliente => {
+        this.clientes = this.clientes.map(clienteOriginal => {
+          if (cliente.id === clienteOriginal.id) {
+            clienteOriginal.foto = cliente.foto;
+          }
+          return clienteOriginal;
+        });
+      });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   delete(cliente: Cliente): void {
