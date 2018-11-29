@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map } from 'rxjs/internal/operators';
+import {Injectable} from '@angular/core';
+import {Observable, throwError} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {catchError, map} from 'rxjs/internal/operators';
 import swal from 'sweetalert2';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 
-import { Cliente } from './cliente.model';
+import {Cliente} from './cliente.model';
 
 
 @Injectable()
@@ -83,7 +83,7 @@ export class ClienteService {
     );
   }
 
-  subirFoto(archivo: File, id: number): Observable<Cliente> {
+  subirFoto(archivo: File, id): Observable<Cliente> {
     const formData = new FormData();
     formData.append('archivo', archivo);
     formData.append('id', id);

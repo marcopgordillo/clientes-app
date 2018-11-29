@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import swal from 'sweetalert2';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 
-import { Cliente } from './cliente.model';
-import { ClienteService } from './cliente.service';
+import {Cliente} from './cliente.model';
+import {ClienteService} from './cliente.service';
 
 
 @Component({
