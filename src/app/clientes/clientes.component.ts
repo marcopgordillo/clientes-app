@@ -1,21 +1,24 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import swal from 'sweetalert2';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
-import {Cliente} from './cliente.model';
-import {ClienteService} from './cliente.service';
-import {ModalService} from "./detalle/modal.service";
+import { Cliente } from './cliente.model';
+import { ClienteService } from './cliente.service';
+import { ModalService } from './detalle/modal.service';
+import { environment } from '../../environments/environment';
 
 
 @Component({
   selector: 'app-clientes',
-  templateUrl: './clientes.component.html'
+  templateUrl: './clientes.component.html',
+  styleUrls: ['./clientes.component.scss']
 })
 export class ClientesComponent implements OnInit {
 
   clientes: Cliente[];
   paginador: any;
   clienteSeleccionado: Cliente;
+  urlImgEndPoint: string = environment.urlImgEndPoint;
 
   constructor(private clienteService: ClienteService,
               private route: ActivatedRoute,

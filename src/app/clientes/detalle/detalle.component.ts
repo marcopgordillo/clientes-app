@@ -1,9 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Cliente} from '../cliente.model';
-import {ClienteService} from '../cliente.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { Cliente } from '../cliente.model';
+import { ClienteService } from '../cliente.service';
 import swal from 'sweetalert2';
-import {HttpEventType} from "@angular/common/http";
-import {ModalService} from "./modal.service";
+import { HttpEventType } from '@angular/common/http';
+import { ModalService } from './modal.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-detalle',
@@ -17,7 +18,7 @@ export class DetalleComponent implements OnInit {
 
   titulo = 'Detalle del Cliente';
   private fotoSeleccionada: File;
-  urlEndPoint = 'http://localhost:8080/api/uploads/img/';
+  urlImgEndPoint = environment.urlImgEndPoint;
   progreso = 0;
 
   constructor(private clienteService: ClienteService,
