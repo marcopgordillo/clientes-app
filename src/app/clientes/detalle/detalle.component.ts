@@ -13,6 +13,7 @@ export class DetalleComponent implements OnInit {
   cliente: Cliente;
   titulo = 'Detalle del Cliente';
   private fotoSeleccionada: File;
+  private urlEndPoint = 'http://localhost:8080/api/uploads/img/';
 
   constructor(private clienteService: ClienteService,
               private route: ActivatedRoute) { }
