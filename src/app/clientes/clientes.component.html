@@ -1,3 +1,4 @@
+<app-detalle *ngIf="clienteSeleccionado" [cliente]="clienteSeleccionado"></app-detalle>
 <div class="card border-primary mb-3">
   <div class="card-header">Clientes</div>
   <div class="card-body text-primary">
@@ -14,7 +15,7 @@
     <table class="table table-bordered table-striped" *ngIf="clientes?.length > 0">
       <thead>
         <tr>
-          <th>id</th>
+          <th>#</th>
           <th>Nombre</th>
           <th>Apellido</th>
           <th>Email</th>
@@ -25,11 +26,17 @@
       </thead>
       <tbody>
         <tr *ngFor="let cliente of clientes">
-          <th scope="row">{{ cliente.id }}</th>
+          <td>
+            <img class="img-thumbnail rounded" alt="Foto cliente" *ngIf="cliente?.foto; else Else" [src]="urlImgEndPoint + cliente.foto" (click)="abrirModal(cliente)" />
+            <ng-template #Else>
+              <img class="img-thumbnail rounded" alt="Sin foto" src="http://localhost:8080/images/no_usuario.svg" (click)="abrirModal(cliente)" />
+            </ng-template>
+
+          </td>
           <td>{{ cliente.nombre }}</td>
-          <td>{{ cliente.apellido }}</td>
+          <td>{{ cliente.apellido | uppercase }}</td>
           <td>{{ cliente.email }}</td>
-          <td>{{ cliente.createAt | date }}</td>
+          <td>{{ cliente.createAt | date:"EEEE dd, MMMM yyyy" }}</td>
           <td>
             <button class="btn btn-warning btn-sm" type="button" [routerLink]="['/clientes/form', cliente.id]">editar</button>
           </td>
@@ -39,5 +46,6 @@
         </tr>
       </tbody>
     </table>
+    <app-paginator *ngIf="paginador" [paginador]="paginador"></app-paginator>
   </div>
 </div>

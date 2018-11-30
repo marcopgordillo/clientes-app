@@ -1,25 +1,57 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import swal from 'sweetalert2';
+import { ActivatedRoute } from '@angular/router';
 
 import { Cliente } from './cliente.model';
 import { ClienteService } from './cliente.service';
+import { ModalService } from './detalle/modal.service';
+import { environment } from '../../environments/environment';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-clientes',
-  templateUrl: './clientes.component.html'
+  templateUrl: './clientes.component.html',
+  styleUrls: ['./clientes.component.scss']
 })
 export class ClientesComponent implements OnInit, OnDestroy {
 
   clientes: Cliente[];
-  subscription: Subscription;
+  paginador: any;
+  clienteSeleccionado: Cliente;
+  urlImgEndPoint: string = environment.urlImgEndPoint;
+  private subscription: Subscription;
 
-  constructor(private clienteService: ClienteService) { }
+  constructor(private clienteService: ClienteService,
+              private route: ActivatedRoute,
+              private modalService: ModalService) { }
 
   ngOnInit() {
-    this.subscription = this.clienteService.getClientes()
-    .subscribe(
-      (clientes: Cliente[]) => this.clientes = clientes);
+    this.route.paramMap.subscribe(params => {
+      let page: number = +params.get('page');
+
+      if (!page) {
+        page = 0;
+      }
+
+      this.clienteService.getClientes(page)
+        .subscribe(
+          response => {
+            this.clientes = response.content as Cliente[];
+            this.paginador = response;
+          });
+      }
+    );
+
+    this.subscription = this.modalService.notificarUpload
+      .subscribe(cliente => {
+        this.clientes = this.clientes.map(clienteOriginal => {
+          if (cliente.id === clienteOriginal.id) {
+            clienteOriginal.foto = cliente.foto;
+          }
+          return clienteOriginal;
+        });
+      });
   }
 
   ngOnDestroy() {
@@ -55,5 +87,10 @@ export class ClientesComponent implements OnInit, OnDestroy {
         );
       }
     });
+  }
+
+  abrirModal(cliente: Cliente) {
+    this.clienteSeleccionado = cliente;
+    this.modalService.abrirModal();
   }
 }

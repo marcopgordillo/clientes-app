@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { catchError, map } from 'rxjs/internal/operators';
 import swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 import { Cliente } from './cliente.model';
-import { Router } from '@angular/router';
+import { Region } from './region.model';
 
 
 @Injectable()
@@ -18,10 +19,23 @@ export class ClienteService {
   constructor(private http: HttpClient,
               private router: Router) { }
 
-  getClientes(): Observable<Cliente[]> {
+  getRegiones(): Observable<Region[]> {
+    return this.http.get<Region[]>(this.urlEndPoint + '/regiones');
+  }
+
+  getClientes(page: number): Observable<any> {
     // return this.http.get<Cliente[]>(this.urlEndPoint);
-    return this.http.get(this.urlEndPoint).pipe(
-      map(response => response as Cliente[])
+    return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
+      map((response: any) => {
+        (response.content as Cliente[]).map(cliente => {
+          cliente.nombre = cliente.nombre.toUpperCase();
+          /*const datePipe = new DatePipe('es');
+          cliente.createAt = datePipe.transform(cliente.createAt, 'EEEE dd, MMMM yyyy');*/
+          // cliente.createAt = formatDate(cliente.createAt, 'dd-MM-yyyy', 'en-US', 'UTC-5');
+          return cliente;
+        });
+        return response;
+      })
     );
   }
 
@@ -29,7 +43,11 @@ export class ClienteService {
     return this.http.post(this.urlEndPoint, cliente, {headers: this.httpHeaders}).pipe(
       map((response: any) => response.cliente as Cliente),
       catchError(e => {
-        console.log(e.error.error);
+
+        if (e.status === 400) {
+          return throwError(e);
+        }
+
         swal(e.error.mensaje, e.error.error, 'error');
         return throwError(e);
       })
@@ -50,7 +68,11 @@ export class ClienteService {
   update(cliente: Cliente): Observable<any> {
     return this.http.put(`${this.urlEndPoint}/${cliente.id}`, cliente, {headers: this.httpHeaders}).pipe(
       catchError(e => {
-        console.log(e.error.error);
+
+        if (e.status === 400) {
+          return throwError(e);
+        }
+
         swal(e.error.mensaje, e.error.error, 'error');
         return throwError(e);
       })
@@ -60,10 +82,19 @@ export class ClienteService {
   delete(id: number): Observable<Cliente> {
     return this.http.delete<Cliente>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders}).pipe(
       catchError(e => {
-        console.log(e.error.error);
         swal(e.error.mensaje, e.error.error, 'error');
         return throwError(e);
       })
     );
+  }
+
+  subirFoto(archivo: File, id): Observable<HttpEvent<{}>> {
+    const formData = new FormData();
+    formData.append('archivo', archivo);
+    formData.append('id', id);
+
+    const req = new HttpRequest('POST', `${this.urlEndPoint}/upload`, formData, {reportProgress: true});
+
+    return this.http.request(req);
   }
 }
