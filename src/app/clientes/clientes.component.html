@@ -29,7 +29,7 @@
           <td>
             <img class="img-thumbnail rounded" alt="Foto cliente" *ngIf="cliente?.foto; else Else" [src]="urlImgEndPoint + cliente.foto" (click)="abrirModal(cliente)" />
             <ng-template #Else>
-              <img class="img-thumbnail rounded" alt="Sin foto" src="http://localhost:8080/images/no_usuario.svg" (click)="abrirModal(cliente)" />
+              <img class="img-thumbnail rounded" alt="Sin foto" src="http://localhost:8080/images/no_usuario.png" (click)="abrirModal(cliente)" />
             </ng-template>
 
           </td>
