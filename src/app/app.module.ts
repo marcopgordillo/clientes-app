@@ -19,6 +19,7 @@ import { MatDatepickerModule } from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { DetalleComponent } from './clientes/detalle/detalle.component';
 import { LoginComponent } from './usuarios/login.component';
+import { AuthService } from './usuarios/auth.service';
 
 registerLocaleData(localeES, 'es');
 
@@ -45,6 +46,7 @@ registerLocaleData(localeES, 'es');
   ],
   providers: [
     ClienteService,
+    AuthService,
     { provide: LOCALE_ID, useValue: 'es' }
   ],
   bootstrap: [AppComponent]
