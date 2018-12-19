@@ -19,6 +19,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.usuario = new Usuario();
+    if (this.authService.isAuthenticated()) {
+      swal('Login', `Hola ${this.authService.usuario.username} ya estás authenticado`, 'info');
+      this.router.navigate(['/clientes']);
+    }
   }
 
   login(): void {
