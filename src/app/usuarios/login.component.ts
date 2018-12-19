@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import swal from 'sweetalert2';
+
+import { Usuario } from './usuario';
 
 @Component({
   selector: 'app-login',
@@ -7,11 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  titulo: string = 'Por favor Sign In!';
-
+  titulo = 'Por favor Sign In!';
+  usuario: Usuario;
   constructor() { }
 
   ngOnInit() {
+    this.usuario = new Usuario();
+  }
+
+  login(): void {
+    console.log(this.usuario);
+    if (this.usuario.username == null || this.usuario.password == null) {
+      swal('Error Login', 'Username o password vacías!', 'error');
+    }
   }
 
 }
