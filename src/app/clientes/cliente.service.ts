@@ -135,8 +135,12 @@ export class ClienteService {
   }
 
   private isNoAutorizado(e): boolean {
-    if (e.status === 401 || e.status === 403) {
+    if (e.status === 401) {
       this.router.navigate(['/login']);
+      return true;
+    } else if ( e.status === 403) {
+      swal('Acceso Denegado', `Hola ${this.authService.usuario.username} no tienes acceso a este recurso`, 'warning');
+      this.router.navigate(['/clientes']);
       return true;
     }
     return false;
