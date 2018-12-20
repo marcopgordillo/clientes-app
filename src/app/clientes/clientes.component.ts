@@ -7,6 +7,7 @@ import { ClienteService } from './cliente.service';
 import { ModalService } from './detalle/modal.service';
 import { environment } from '../../environments/environment';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../usuarios/auth.service';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class ClientesComponent implements OnInit, OnDestroy {
 
   constructor(private clienteService: ClienteService,
               private route: ActivatedRoute,
-              private modalService: ModalService) { }
+              private modalService: ModalService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
