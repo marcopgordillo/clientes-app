@@ -80,4 +80,12 @@ export class AuthService {
     }
     return false;
   }
+
+  logout(): void {
+    this._token = null;
+    this._usuario = null;
+    sessionStorage.clear();
+    //sessionStorage.removeItem('token');
+    //sessionStorage.removeItem('usuario');
+  }
 }
