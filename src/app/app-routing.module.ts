@@ -6,6 +6,8 @@ import { FormComponent } from './clientes/form/form.component';
 import { LoginComponent } from './usuarios/login.component';
 import { AuthGuard } from './usuarios/guards/auth.guard';
 import { RoleGuard } from './usuarios/guards/role.guard';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { DetalleFacturaComponent } from './facturas/detalle-factura.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/clientes', pathMatch: 'full' },
@@ -16,7 +18,10 @@ const routes: Routes = [
       {role: 'ROLE_ADMIN'}},
   { path: 'clientes/form/:id', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data:
       {role: 'ROLE_ADMIN'} },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'facturas/:id', component: DetalleFacturaComponent },
+  { path: 'notfound404', component: NotFoundComponent },
+  { path: '**', redirectTo: '/notfound404', pathMatch: 'full' }
 ];
 
 @NgModule({
