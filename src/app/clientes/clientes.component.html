@@ -15,7 +15,7 @@
     <table class="table table-bordered table-striped" *ngIf="clientes?.length > 0">
       <thead>
         <tr>
-          <th *ngIf="authService.hasRole('ROLE_USER')">#</th>
+          <th>#</th>
           <th>Nombre</th>
           <th>Apellido</th>
           <th>Email</th>
@@ -26,7 +26,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let cliente of clientes">
-          <td *ngIf="authService.hasRole('ROLE_USER')">
+          <td>
             <img class="img-thumbnail rounded" alt="Foto cliente" *ngIf="cliente?.foto; else Else" [src]="urlImgEndPoint + cliente.foto" (click)="abrirModal(cliente)" />
             <ng-template #Else>
               <img class="img-thumbnail rounded" alt="Sin foto" src="http://localhost:8080/images/no_usuario.png" (click)="abrirModal(cliente)" />
