@@ -1,4 +1,5 @@
 import { Region } from './region.model';
+import { Factura } from '../facturas/models/factura.model';
 
 export class Cliente {
   id: number;
@@ -8,4 +9,5 @@ export class Cliente {
   email: string;
   foto: string;
   region: Region;
+  facturas: Factura[] = [];
 }
