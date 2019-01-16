@@ -69,7 +69,7 @@ export class ClientesComponent implements OnInit, OnDestroy {
 
     swalWithBootstrapButtons({
       title: '¿Estas seguro?',
-      text: `¿Seguro que deseas eliminar al cliente ${cliente.nombre}?`,
+      text: `¿Seguro que deseas eliminar al cliente ${cliente.nombre} ${cliente.apellido}?`,
       type: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Si, eliminar!',
