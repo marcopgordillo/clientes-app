@@ -24,6 +24,7 @@ import { TokenInterceptor } from './usuarios/interceptors/token.interceptor';
 import { AuthInterceptor } from './usuarios/interceptors/auth.interceptor';
 import { DetalleFacturaComponent } from './facturas/detalle-factura.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { FacturasComponent } from './facturas/facturas.component';
 
 registerLocaleData(localeES, 'es');
 
@@ -39,7 +40,8 @@ registerLocaleData(localeES, 'es');
     DetalleComponent,
     LoginComponent,
     DetalleFacturaComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    FacturasComponent
   ],
   imports: [
     BrowserModule,

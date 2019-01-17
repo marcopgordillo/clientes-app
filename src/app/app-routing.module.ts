@@ -8,6 +8,7 @@ import { AuthGuard } from './usuarios/guards/auth.guard';
 import { RoleGuard } from './usuarios/guards/role.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { DetalleFacturaComponent } from './facturas/detalle-factura.component';
+import { FacturasComponent } from './facturas/facturas.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/clientes', pathMatch: 'full' },
@@ -20,6 +21,7 @@ const routes: Routes = [
       {role: 'ROLE_ADMIN'} },
   { path: 'login', component: LoginComponent },
   { path: 'facturas/:id', component: DetalleFacturaComponent },
+  { path: 'facturas/form/:clienteId', component: FacturasComponent },
   { path: 'notfound404', component: NotFoundComponent },
   { path: '**', redirectTo: '/notfound404', pathMatch: 'full' }
 ];
