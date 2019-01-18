@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FacturaService } from './services/factura.service';
-import { Factura } from './models/factura.model';
+import { FacturaService } from '../services/factura.service';
+import { Factura } from '../models/factura.model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
