@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { FacturaService } from './services/factura.service';
 
 @Component({
   selector: 'app-facturas',
@@ -20,6 +21,7 @@ export class FacturasComponent implements OnInit {
   productosFiltrados: Observable<string[]>;
 
   constructor(private clienteService: ClienteService,
+              private facturaService: FacturaService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
