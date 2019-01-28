@@ -25,6 +25,7 @@ import { AuthInterceptor } from './usuarios/interceptors/auth.interceptor';
 import { DetalleFacturaComponent } from './facturas/detalle-factura/detalle-factura.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FacturasComponent } from './facturas/facturas.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 registerLocaleData(localeES, 'es');
 
@@ -54,6 +55,7 @@ registerLocaleData(localeES, 'es');
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,
+    FontAwesomeModule,
     AppRoutingModule
   ],
   providers: [

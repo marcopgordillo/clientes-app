@@ -9,6 +9,7 @@ import { FacturaService } from './services/factura.service';
 import { Producto } from './models/producto.model';
 import { MatAutocompleteSelectedEvent } from '@angular/material';
 import { ItemFactura } from './models/item-factura.model';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-facturas',
@@ -22,6 +23,7 @@ export class FacturasComponent implements OnInit {
   autoCompleteControl = new FormControl();
   productos: string[] = ['Mesa', 'Tablet', 'Sony', 'Samsung', 'TV LG', 'Bicicleta'];
   productosFiltrados: Observable<Producto[]>;
+  faTrashAlt = faTrashAlt;
 
   constructor(private clienteService: ClienteService,
               private facturaService: FacturaService,
@@ -69,6 +71,10 @@ export class FacturasComponent implements OnInit {
   actualizarCantidad(id: number, event: any): void {
     const cantidad = event.target.value as number;
 
+    if (cantidad == 0) {
+      return this.eliminarItemFactura(id);
+    }
+
     this.factura.items = this.factura.items.map((item: ItemFactura) => {
       if (id === item.producto.id) {
         item.cantidad = cantidad;
@@ -95,5 +101,9 @@ export class FacturasComponent implements OnInit {
       }
       return item;
     });
+  }
+
+  eliminarItemFactura(id: number): void {
+    this.factura.items = this.factura.items.filter((item: ItemFactura) => id !== item.producto.id);
   }
 }
