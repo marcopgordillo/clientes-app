@@ -38,32 +38,42 @@
         </div>
       </div>
 
-      <table class="table table-striped table-hover table-sm">
-        <thead>
-        <tr>
-          <th>Producto</th>
-          <th>Precio</th>
-          <th>Cantidad</th>
-          <th>Total</th>
-          <th>Eliminar</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let item of factura.items">
-          <td>{{ item.producto.nombre }}</td>
-          <td>{{ item.producto.precio | currency }}</td>
-          <td><input type="number" min="0" class="form-control col-sm-4" value="{{ item.cantidad }}"
-                     (change)="actualizarCantidad(item.producto.id, $event)" /></td>
-          <td>{{ item.calcularImporte() | currency }}</td>
-          <td>
-            <button type="button" class="btn btn-danger-btn-xs" (click)="eliminarItemFactura(item.producto.id)">
-              <fa-icon [icon]="faTrashAlt"></fa-icon>
-              <span class="sr-only">Eliminar Producto</span>
-            </button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+      <div class="alert alert-info my-4" *ngIf="factura.items.length == 0; else Else">
+        No hay líneas asignadas para el cliente. Debe agregar al menos una.
+      </div>
+
+      <ng-template #Else>
+        <table class="table table-striped table-hover table-sm">
+          <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+            <th>Eliminar</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of factura.items">
+            <td>{{ item.producto.nombre }}</td>
+            <td>{{ item.producto.precio | currency }}</td>
+            <td><input type="number" min="0" class="form-control col-sm-4" value="{{ item.cantidad }}"
+                       (change)="actualizarCantidad(item.producto.id, $event)" /></td>
+            <td>{{ item.calcularImporte() | currency }}</td>
+            <td>
+              <button type="button" class="btn btn-danger-btn-xs" (click)="eliminarItemFactura(item.producto.id)">
+                <fa-icon [icon]="faTrashAlt"></fa-icon>
+                <span class="sr-only">Eliminar Producto</span>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <h5 class="float-right">Gran Total: <span class="badge badge-secondary">{{ factura.calcularGranTotal() }}</span></h5>
+
+      </ng-template>
+
       <div class="form-group row">
         <div class="col-sm-6">
           <input type="submit" class="btn btn-secondary" value="Crear Factura" />
