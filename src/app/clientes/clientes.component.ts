@@ -25,8 +25,8 @@ export class ClientesComponent implements OnInit, OnDestroy {
 
   constructor(private clienteService: ClienteService,
               private route: ActivatedRoute,
-              private modalService: ModalService,
-              private authService: AuthService) { }
+              public modalService: ModalService,
+              public authService: AuthService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
