@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlImgEndPoint: 'http://localhost:8080/api/uploads/img/'
+  URL_BACKEND: 'http://localhost:8080'
 };
 
 /*

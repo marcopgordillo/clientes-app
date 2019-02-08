@@ -3,13 +3,14 @@ import { Factura } from '../models/factura.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Producto } from '../models/producto.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FacturaService {
 
-  private urlEndPoint = 'http://localhost:8080/api/facturas';
+  private urlEndPoint = environment.URL_BACKEND + '/api/facturas';
 
   constructor(private http: HttpClient) { }
 

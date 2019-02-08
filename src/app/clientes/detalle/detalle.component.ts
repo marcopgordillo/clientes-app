@@ -21,7 +21,7 @@ export class DetalleComponent implements OnInit {
 
   titulo = 'Detalle del Cliente';
   private fotoSeleccionada: File;
-  urlImgEndPoint = environment.urlImgEndPoint;
+  urlImgEndPoint: string = environment.URL_BACKEND + '/api/uploads/img/';
   progreso = 0;
 
   constructor(private clienteService: ClienteService,

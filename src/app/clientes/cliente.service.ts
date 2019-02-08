@@ -6,11 +6,12 @@ import { Router } from '@angular/router';
 
 import { Cliente } from './cliente.model';
 import { Region } from './region.model';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class ClienteService {
 
-  private urlEndPoint = 'http://localhost:8080/api/clientes';
+  private urlEndPoint = environment.URL_BACKEND + '/api/clientes';
 
   constructor(private http: HttpClient,
               private router: Router) { }

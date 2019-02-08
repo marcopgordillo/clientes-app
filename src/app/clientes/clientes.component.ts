@@ -20,7 +20,8 @@ export class ClientesComponent implements OnInit, OnDestroy {
   clientes: Cliente[];
   paginador: any;
   clienteSeleccionado: Cliente;
-  urlImgEndPoint: string = environment.urlImgEndPoint;
+  urlBackend: string = environment.URL_BACKEND;
+  urlImgEndPoint: string = environment.URL_BACKEND + '/api/uploads/img/';
   private subscription: Subscription;
 
   constructor(private clienteService: ClienteService,
